@@ -1,0 +1,23 @@
+Deadlock:
+Deadlock is a situation in which two or more competing actions are each waiting for the other to finish, and thus neither ever does
+
+Databases -> deadlock happens when two processes each within its own transaction updates two rows of information but in the opposite order. For example, process A updates row 1 then row 2 in the exact timeframe that process B updates row 2 then row 1 !!!
+
+Wait for row1 to update, other waits for row 2 to update 
+
+
+Operating system -> a deadlock is a situation which occurs when a process or thread enters a waiting state because a resource requested is being held by another waiting process, which in turn is waiting for another resource held by another waiting process
+
+CHECK: If there is a cycle in a (represent as a directed graph) directed graph, there will be a deadlock. Using DFS.
+
+Livelock:
+A thread often acts in response to the action of another thread. 
+
+ If the other thread's action is also a response to the action of another thread -> livelock !!!
+
+Livelocked threads are unable to make further progress. However, the threads are not blocked ->
+they are simply too busy responding to each other to resume work
+
+Like two people attempting to pass each other in a narrow corridor: A moves to his left to let B pass, while B moves to his right to let A pass. They are still blocking each other, A moves to his right, while B moves to his left ... still not good
+
+EX: too busy, 2 ppl cross each other Iona. Narrow corridor, person a moves left to let them pass, person b moves left to let them pass. Too busy with each other.
