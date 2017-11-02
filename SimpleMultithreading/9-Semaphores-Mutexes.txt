@@ -1,0 +1,36 @@
+Semaphores
+
+Invented by Dijkstra in 1962
+
+Semaphores are variables or ADT that are used for controlling access to a common resource.
+
+Semaphores -> is a record of how many units of a particular resource are available (NOT which of the resources, just how many units) … wait until a unit of the resource becomes available
+
+Counting semaphore: allows an arbitrary resource count
+
+Binary semaphore: semaphores which are restricted to the values 0 an 1
+
+Used as a useful trigger
+
+
+======
+
+Mutexes (Mutual exclusions)
+
+Similar to a binary semaphore
+While a binary semaphore may be used as a mutex, a mutex is a more specific use-case
+
+Mutexes have a concept of an owner. Only the process that locked the mutex is supposed to unlock it.
+
+Mutexes may provide priority inversion safety (if the mutex knows its current owner, it is possible to promote the priority of the owner whenever a higher priority task starts waiting on the mutex)
+
+Mutex can provide deletion safety
+
+
+Semaphores Library Analogy:
+
+suppose a library has 10 identical study rooms, intended to be used by one student at a time. To prevent disputes, students must request a room from the front counter if they wish to make use of a study room. When a student has finished using a room, the student must return to the counter and indicate that one room has become free. If no rooms are free, students wait at the counter until someone relinquishes a room.
+
+The clerk at the front desk does not keep track of which room is occupied, only the number of free rooms available. When a student requests a room, the clerk decreases this number. When a student releases a room, the clerk increases this number. Once access to a room is granted, the room can be used for as long as desired, and so it is not possible to book rooms ahead of time.
+
+In this scenario the front desk represents a semaphore, the rooms are the resources, and the students represent processes. The value of the semaphore in this scenario is initially 10. When a student requests a room he or she is granted access and the value of the semaphore is changed to 9. After the next student comes, it drops to 8, then 7 and so on. If someone requests a room and the resulting value of the semaphore is negative, they are forced to wait. When multiple people are waiting, they will either wait in a queue, or use Round-robin scheduling and race back to the counter when someone releases a room (depending on the nature of the semaphore).
