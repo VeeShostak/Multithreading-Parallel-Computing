@@ -14,6 +14,24 @@ import java.util.concurrent.locks.ReentrantLock;
 	
 	critical section: (a code segment that accesses shared variables and has to be executed as an atomic action) 
 */
+
+/*
+	ReentrantLock vs synchronized blocks:
+
+	We can make a lock fair: prevent thread starvation
+	Synchronized blocks are unfair by default
+
+	We can check whether the given lock is held or not
+	with reentrant locks
+
+	We can get the list of threads waiting for the given lock
+	with reentrant locks
+
+	Synchronized blocks are cleaner: we do not need the 
+		try-catch-finally block
+
+*/
+	
 public class Demo {
 
 	private static int counter = 0;
