@@ -4,6 +4,21 @@ package com.veeshostak.github;
 // If thread uses that method, no other synchronized method can be called from that class 
 // until it is done with that method (because an intrinsic lock on the class was placed).
 
+
+	// public synchronized static void add() {
+	// 		count1++;
+	// 	}
+	
+	//same as:
+	// public static synchronized void increment() {
+	// 	synchronized (App.class) {
+	// 		count1++;
+
+	// 	}
+	// }
+
+
+
 /*
 public class Demo {
 
@@ -13,6 +28,14 @@ public class Demo {
 	public synchronized static void add() {
 		count1++;
 	}
+	
+	//same as:
+	// public static synchronized void increment() {
+	// 	synchronized (App.class) {
+	// 		count1++;
+
+	// 	}
+	// }
 	
 	public synchronized static void addAgain() {
 		count2++;
