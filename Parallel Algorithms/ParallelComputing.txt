@@ -1,0 +1,83 @@
+================================
+PARALLEL ALGORITHMS
+================================
+
+PARALLEL VS SEQUENTIAL
+
+Sequential algorithms: execute task one after the other
+Parallel algorithms: execute different tasks with different processors + combine the results.
+Some problems are easy to parallelize, others are sequential.
+
+Parallel ex:
+Checking prime numbers in a range (make subsets, find primes sequentially in the subsets and combine the results). (Linear regression)
+
+Sequential ex:
+Numerical methods. (Any algorithms where next step relies on previous one, Newton-method for ringing root of given function, Euler method of differential equations).
+
+With a multicore processor we can boost our algorithms by making them parallel.
+
+===
+
+If there is a single processor, it uses time slicing between threads which is slower than a simple sequential implementation.
+
+If we use threads, it won’t be necessarily executed in parallel, it depends on the OS.
+
+Parallel execution: we can execute multiple threads at the same time.
+
+So we have to ask the OS how many processors cores are in the machine.
+
+Problems:
+Thread communication:
+For serial algorithms we have memory and time complexity.
+For parallel algorithms we have to consider communication between threads
+
+Parallel slowdown: result of a communications bottleneck. As more processor nodes are added, each processing node spends progressively more time doing communication than useful processing. So we have to optimize.
+
+
+Load balance:
+We have to make sure we split the work evenly amongst the processors.
+
+
+
+
+================================
+MERGE SORT OVERVIEW
+================================
+
+Divide and conquer
+Comparison based algorithm O(NlogN) time
+Stable sorting algorithm
+
+Not an in-place algorithm: (need additional memory)
+Although heap sort has the same time bounds as merge sort -> heap sort requires only theta(1) auxiliary space, instead of merge sorts theta(n)
+
+Efficient quick sort implementations generally outperform merge sort
+
+Mergesort is usually the best way choice for sorting a linked list: in this case it is relatively easy to implement with O(1) space.
+
+Quicksort
+In place
+Not stable
+Sometimes quadratic, not guaranteed to be nlogn
+
+Mergesort
+Not in place
+Stable
+O(nlogn) guranteed
+
+
+Mergesort algorithm:
+Divide array into two subarrays recursively
+Sort these subarrays recurselvy with mergesort
+If there is only a single item left in the subarray, we consider it to be sorted by definition(base case)
+Merge the subarrays to get the final sorted array
+
+
+================================
+PARTIAL SUM OVERVIEW
+================================
+
+Assign a task to every processor
+Thread 1 sums half the array, thread 2 the other half…
+(create as many parallel workers as the number of cores)
+(accumulate partial sums)
