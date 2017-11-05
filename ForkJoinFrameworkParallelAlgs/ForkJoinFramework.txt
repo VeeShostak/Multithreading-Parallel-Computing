@@ -1,0 +1,59 @@
+================================
+FORK JOIN FRAMEWORK
+================================
+Concrete implementation for parallel execution !!!
+We do not have to bother about low level synchronizations or locks 
+
+Divide and conquer algorithms:
+A larger task -> it can be divided into smaller ones + the subsolutions can be combined 
+(subtasks have to be independent in order to be executed in parallel)
+
+So the main concept -> fork-join framework breaks the task into smalles subtasks until these subtasks are simple enough to solve without further breakups
+
+
+ex. parallel merge sort, parallel maximum finding
+
+===
+the main interfaces and classes of the framework:
+
+RecursiveTask<T>     it will return a generic T type
+All the tasks we want to execute in parallel is a subclass of this class
+	We have to override the compute method that will return the 
+		solution of the subproblem 
+
+Every class that extends this recursive task will be able to be executed in parallel (almost like the Thread class)
+
+RecursiveAction  it is a task(as above), but without any return value
+
+
+ForkJoinPool
+Basically it is a thread pool for executing fork-join tasks
+
+work-stealing: a task is not equivalent to a thread.
+	Tasks are lightweight threads -> so fork-join will be efficient even when
+	there are a huge number of tasks
+
+So ForkJoinPool creates a fix number of threads -> usually the number of CPU cores
+
+These threads are executing the tasks but if a thread has no task: it can „steal” a task
+	from more busy threads
+		~ tasks are distributed to all threads in the thread pool
+
+===
+
+fork -> split the given task into smaller subtasks that can be
+		executed in a parallel manner
+
+join -> the splitted tasks are being executed and after all of them are finished
+		they are merged into one result
+
+invoke(): executes the given task + return its result upon completion
+join(): return result of the computation when done
+fork():asynchronously execute the given task in the pool. We can call this on RecursiveAction or RecursiveTask(T)
+
+
+-not guranteed that every single thread will be assigned a task, they will be inserted into the forkjoin pool and it will determine if there is a thread available to execute the given task
+
+// do not create more threads than the number of processors, because then it 
+// will be multithreaded execution and not parallel
+
